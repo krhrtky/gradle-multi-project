@@ -15,6 +15,6 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 spring-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "springBoot" }
 spring-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "springBoot" }
 spring-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "springBoot" }
-jackson-module-kotlin  = "com.fasterxml.jackson.module:jackson-module-kotlin:2.14.0"
+jackson-module-kotlin  = "com.fasterxml.jackson.module:jackson-module-kotlin:2.14.1"
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
