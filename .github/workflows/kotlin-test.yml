@@ -11,10 +11,11 @@ jobs:
           distribution: temurin
           java-version: 11
       - name: Setup and execute Gradle 'test' task
+        id: lint
         uses: gradle/gradle-build-action@v2
         with:
           arguments: detekt
       - uses: github/codeql-action/upload-sarif@v2
-        if: success() || failure()
+        if: ${{ failure() && steps.lint.conclusion == 'failure' }}
         with:
           sarif_file: /tmp/report/detekt.sarif
