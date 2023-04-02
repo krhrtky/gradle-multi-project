@@ -2,5 +2,8 @@
 rootProject.name = "gradle-multi-project"
 
 include(
-    "app"
+    "backend",
+    "backend:api",
+    "backend:domains",
+    "backend:infrastructure",
 )

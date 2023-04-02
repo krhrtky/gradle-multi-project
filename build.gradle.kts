@@ -10,7 +10,7 @@ plugins {
 }
 
 detekt {
-    val targetDir = listOf("app").flatMap {
+    val targetDir = listOf("backend").flatMap {
         listOf(
             "$it/src/main/kotlin",
             "$it/src/test/kotlin",
