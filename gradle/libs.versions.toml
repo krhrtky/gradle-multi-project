@@ -2,7 +2,7 @@
 kotlin = "1.8.20"
 springPlugin = "1.7.21"
 springBoot = "2.7.10"
-springDependencyManagement = "1.0.15.RELEASE"
+springDependencyManagement = "1.1.0"
 detekt = "1.22.0"
 archUnit = "1.0.1"
 
