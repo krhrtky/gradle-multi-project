@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan
 @ComponentScan(basePackages = ["com.example"])
 open class AppApplication
 
+@Suppress("SpreadOperator")
 fun main(args: Array<String>) {
   runApplication<AppApplication>(*args)
 }
