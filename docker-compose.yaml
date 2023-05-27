@@ -1,0 +1,23 @@
+version: '3'
+services:
+  sqldef:
+    build: './docker/sqldef'
+    volumes:
+      - './docker/sqldef/volume:/volume'
+    environment:
+      DB_USER: root
+      DB_PASSWORD: password
+    depends_on:
+      - db
+  db:
+    image: 'mysql:8.0.33'
+    volumes:
+      - db-store:/var/lib/mysql
+      - ./logs:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: app
+    ports:
+      - '3306:3306'
+volumes:
+  db-store:

@@ -5,6 +5,7 @@ springBoot = "2.7.10"
 springDependencyManagement = "1.1.0"
 detekt = "1.22.0"
 archUnit = "1.0.1"
+junit = "5.9.2"
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
@@ -15,9 +16,12 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 [libraries]
 spring-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "springBoot" }
 spring-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator", version.ref = "springBoot" }
+spring-starter-jooq = { module = "org.springframework.boot:spring-boot-starter-jooq", version.ref = "springBoot" }
 spring-autoconfigure = { module = "org.springframework.boot:spring-boot-autoconfigure", version.ref = "springBoot" }
 spring-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "springBoot" }
 jackson-module-kotlin  = "com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2"
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 arch-unit = { module = "com.tngtech.archunit:archunit", version.ref = "archUnit" }
+junit-platform = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }

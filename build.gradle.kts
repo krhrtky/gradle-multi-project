@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
     kotlin("jvm") version libs.versions.kotlin
@@ -39,7 +40,7 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
 }
 
 tasks.withType<DetektCreateBaselineTask>().configureEach {
-    jvmTarget = "11"
+    jvmTarget = "17"
 }
 
 allprojects {
@@ -50,21 +51,22 @@ allprojects {
     apply(plugin = "kotlin")
     group = "org.example"
     version = "1.0-SNAPSHOT"
-    java.sourceCompatibility = JavaVersion.VERSION_11
+    java.sourceCompatibility = JavaVersion.VERSION_17
 }
 
 subprojects {
-
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "11"
+            jvmTarget = "17"
         }
     }
 
     tasks.withType<Test> {
         useJUnitPlatform()
     }
+}
 
-
+tasks.withType<BootRun> {
+    dependsOn("generateJooq")
 }
