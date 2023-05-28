@@ -5,6 +5,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 plugins {
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
+    id("org.jetbrains.kotlin.plugin.spring") version libs.versions.kotlin
     id("nu.studer.jooq") version "6.0.1"
 }
 
@@ -15,15 +16,14 @@ dependencies {
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlin.stdlib)
     implementation(project(":backend:domains"))
-    implementation("javax.annotation:javax.annotation-api:1.3.2")
 
     testImplementation(libs.spring.starter.test) {
         exclude("org.junit.vintage:junit-vintage-engine")
     }
     testImplementation(kotlin("test"))
 
-    compileOnly("org.jooq:jooq-codegen")
-    compileOnly("org.jooq:jooq")
+//    compileOnly("org.jooq:jooq-codegen")
+//    compileOnly("org.jooq:jooq")
     runtimeOnly("com.mysql:mysql-connector-j:8.0.33")
     jooqGenerator("com.mysql:mysql-connector-j:8.0.33")
 }
@@ -36,7 +36,7 @@ tasks.getByName<Jar>("jar") {
     enabled = true
 }
 
-val x = rootProject.dependencyManagement.importedProperties["jooq.version"]
+val jooqVersion = rootProject.dependencyManagement.importedProperties["jooq.version"]
 
 buildscript {
     configurations["classpath"].resolutionStrategy.eachDependency {
@@ -47,7 +47,7 @@ buildscript {
 }
 
 jooq {
-    version.set(x)
+    version.set(jooqVersion)
     edition.set(JooqEdition.OSS)
 
     configurations {

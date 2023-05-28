@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 import java.time.LocalDateTime
 
 @Repository
-open class MySQLUserRepository(
+class MySQLUserRepository(
     private val context: DSLContext,
 ) : UserRepository {
     override fun find(id: String) =
