@@ -1,4 +1,4 @@
-.PHONY: db-up, migration, db-migrate, db-codegen
+.PHONY: db-up, migration, db-migrate, db-codegen, api-image
 
 db-up:
 	compose up db -d
@@ -10,3 +10,9 @@ db-migrate:
 
 db-codegen:
 	 ./gradlew backend:infrastructure:generateJooq
+
+api-image:
+	DB_URL=${DB_URL} \
+	DB_USER=${DB_USER} \
+	DB_PASSWORD=${DB_PASSWORD} \
+	docker build -f backend/api/Dockerfile .
