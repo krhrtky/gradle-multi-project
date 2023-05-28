@@ -18,7 +18,3 @@ dependencies {
     }
     testImplementation(kotlin("test"))
 }
-
-tasks.withType<BootRun> {
-    jvmArgs = listOf("--illegal-access=deny")
-}
