@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.8.20"
-springBoot = "2.7.10"
+springBoot = "2.7.12"
 springDependencyManagement = "1.1.0"
 detekt = "1.22.0"
 archUnit = "1.0.1"
