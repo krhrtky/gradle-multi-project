@@ -22,8 +22,6 @@ dependencies {
     }
     testImplementation(kotlin("test"))
 
-//    compileOnly("org.jooq:jooq-codegen")
-//    compileOnly("org.jooq:jooq")
     runtimeOnly("com.mysql:mysql-connector-j:8.0.33")
     jooqGenerator("com.mysql:mysql-connector-j:8.0.33")
 }
@@ -37,14 +35,6 @@ tasks.getByName<Jar>("jar") {
 }
 
 val jooqVersion = rootProject.dependencyManagement.importedProperties["jooq.version"]
-
-buildscript {
-    configurations["classpath"].resolutionStrategy.eachDependency {
-        if (requested.group == "org.jooq") {
-            useVersion("3.14.3")
-        }
-    }
-}
 
 jooq {
     version.set(jooqVersion)
@@ -61,7 +51,7 @@ jooq {
                     password = "password"
                 }
                 generator.apply {
-                    name = "org.jooq.codegen.DefaultGenerator"
+                    name = "org.jooq.codegen.KotlinGenerator"
                     database.apply {
                         name = "org.jooq.meta.mysql.MySQLDatabase"
                         inputSchema = "app"
@@ -70,6 +60,8 @@ jooq {
                         isRecords = true
                         isImmutablePojos = true
                         isFluentSetters = true
+                        isPojosAsKotlinDataClasses = true
+                        isKotlinNotNullRecordAttributes = true
                     }
                     target.apply {
                         packageName = "com.example.infrastructure.db"
