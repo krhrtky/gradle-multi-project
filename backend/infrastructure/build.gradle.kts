@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
     id("org.jetbrains.kotlin.plugin.spring") version libs.versions.kotlin
-    id("nu.studer.jooq") version "6.0.1"
+    id("nu.studer.jooq") version "8.2"
 }
 
 dependencies {
