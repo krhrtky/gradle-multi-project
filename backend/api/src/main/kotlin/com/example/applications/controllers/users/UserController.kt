@@ -26,7 +26,7 @@ class UserController(
             .map(::ok)
             .getOrElse { notFound().build() }
 
-    @PostMapping("/")
+    @PostMapping
     fun create(@RequestBody requestBody: CreateRequestBody) =
         requestBody
             .let {
