@@ -2,7 +2,7 @@ package com.example.infrastructure.users
 
 import com.example.domains.entities.users.User
 import com.example.domains.entities.users.UserRepository
-import com.example.infrastructure.db.tables.User.USER
+import com.example.infrastructure.db.tables.User.Companion.USER
 import com.example.infrastructure.db.tables.records.UserRecord
 import org.jooq.DSLContext
 import org.springframework.stereotype.Repository
@@ -32,11 +32,11 @@ class MySQLUserRepository(
     override fun save(newUser: User) {
         newUser
             .map { id, name, email ->
-                UserRecord().apply {
-                    this.id = id
-                    this.name = name
-                    this.email = email
-                }
+                UserRecord(
+                    id = id,
+                    name = name,
+                    email = email,
+                )
             }
             .let {
                 context
