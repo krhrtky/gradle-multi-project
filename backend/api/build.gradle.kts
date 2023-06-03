@@ -3,6 +3,7 @@ import org.springframework.boot.gradle.tasks.run.BootRun
 plugins {
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
+    id("com.netflix.dgs.codegen") version "5.11.1"
 }
 
 dependencies {
@@ -11,6 +12,8 @@ dependencies {
     implementation(libs.jackson.module.kotlin)
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlin.stdlib)
+    implementation(platform(libs.graphql.dgs.platform))
+    implementation(libs.graphql.dgs.spring.boot)
     implementation(project(":backend:domains"))
     implementation(project(":backend:infrastructure"))
     testImplementation(libs.spring.starter.test) {
