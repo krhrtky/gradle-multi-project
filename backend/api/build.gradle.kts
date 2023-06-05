@@ -1,3 +1,4 @@
+import com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask
 import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
@@ -20,4 +21,9 @@ dependencies {
         exclude("org.junit.vintage:junit-vintage-engine")
     }
     testImplementation(kotlin("test"))
+}
+
+tasks.generateJava {
+    schemaPaths = mutableListOf("${rootProject.projectDir}/schema.graphql")
+    packageName = "com.example.applications.graphql"
 }
