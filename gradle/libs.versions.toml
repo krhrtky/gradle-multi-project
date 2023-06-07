@@ -4,12 +4,12 @@ springBoot = "3.1.0"
 springDependencyManagement = "1.1.0"
 detekt = "1.23.0"
 archUnit = "1.0.1"
+dgs = "7.1.0"
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "springDependencyManagement" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-
 
 [libraries]
 spring-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
@@ -21,3 +21,5 @@ jackson-module-kotlin  = "com.fasterxml.jackson.module:jackson-module-kotlin:2.1
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 arch-unit = { module = "com.tngtech.archunit:archunit", version.ref = "archUnit" }
+graphql-dgs-platform = { module = "com.netflix.graphql.dgs:graphql-dgs-platform-dependencies", version.ref = "dgs" }
+graphql-dgs-spring-boot = { module = "com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter", version.ref = "dgs" }
