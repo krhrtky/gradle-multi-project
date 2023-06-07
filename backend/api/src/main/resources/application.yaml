@@ -1,0 +1,3 @@
+dgs:
+  graphql:
+    schema-locations: "file:../../schema.graphql"
