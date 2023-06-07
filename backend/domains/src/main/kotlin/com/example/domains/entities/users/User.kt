@@ -1,7 +1,6 @@
 package com.example.domains.entities.users
 
 import org.springframework.context.ApplicationEvent
-import java.time.LocalDate
 import java.util.UUID
 
 class User private constructor(
