@@ -5,8 +5,6 @@ import org.springframework.stereotype.Component
 
 @Component
 class UserEventListener {
-//    @EventListener
-    fun onUserCreated() {
-
-    }
+    @EventListener
+    fun onUserCreated() = Unit
 }
