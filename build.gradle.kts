@@ -11,10 +11,10 @@ plugins {
 }
 
 detekt {
-    val targetDir = listOf("backend").flatMap {
+    val targetDir = project.allprojects.flatMap {
         listOf(
-            "$it/src/main/kotlin",
-            "$it/src/test/kotlin",
+            "${it.projectDir}/src/main/kotlin",
+            "${it.projectDir}/src/test/kotlin",
         )
     }
     buildUponDefaultConfig = true
