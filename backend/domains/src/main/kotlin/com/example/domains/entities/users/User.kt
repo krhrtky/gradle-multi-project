@@ -1,6 +1,5 @@
 package com.example.domains.entities.users
 
-import org.springframework.context.ApplicationEvent
 import java.util.UUID
 
 class User private constructor(
@@ -19,7 +18,7 @@ class User private constructor(
             UserEmailUpdatedEvent(
                 id,
                 email,
-                this,
+                newEmail,
             )
                 .let(::listOf)
         )
@@ -71,7 +70,6 @@ class User private constructor(
                         UserCreatedEvent(
                             it,
                             email,
-                            this,
                         )
                             .let(::listOf)
                     )
@@ -90,16 +88,15 @@ class User private constructor(
     }
 }
 
-abstract class UserDomainEvent(private val source: Any): ApplicationEvent(source)
+interface UserDomainEvent
 
 data class UserCreatedEvent(
     val userId: String,
     val email: String,
-    private val source: Any
-): UserDomainEvent(source)
+): UserDomainEvent
 
 data class UserEmailUpdatedEvent(
     val userId: String,
-    val email: String,
-    private val source: Any
-): UserDomainEvent(source)
+    val beforeEmail: String,
+    val afterEmail: String,
+): UserDomainEvent

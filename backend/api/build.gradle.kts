@@ -1,6 +1,3 @@
-import com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask
-import org.springframework.boot.gradle.tasks.run.BootRun
-
 plugins {
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
@@ -19,7 +16,9 @@ dependencies {
     implementation(project(":backend:infrastructure"))
     testImplementation(libs.spring.starter.test) {
         exclude("org.junit.vintage:junit-vintage-engine")
+        exclude(module = "mockito-core")
     }
+    testImplementation("com.ninja-squad:springmockk:4.0.2")
     testImplementation(kotlin("test"))
 }
 

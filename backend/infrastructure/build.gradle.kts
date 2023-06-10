@@ -19,6 +19,7 @@ dependencies {
 
     testImplementation(libs.spring.starter.test) {
         exclude("org.junit.vintage:junit-vintage-engine")
+        exclude(module = "mockito-core")
     }
     testImplementation(kotlin("test"))
 
