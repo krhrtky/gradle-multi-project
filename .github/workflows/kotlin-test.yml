@@ -15,7 +15,15 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: detekt
+      - name: Check detekt file exists
+        id: checkDetektFile
+        run: |
+          if [ -f "build/reports/detekt/detekt.sarif" ]; then
+            echo "exists=true" >> $GITHUB_ENV
+          else
+            echo "exists=false" >> $GITHUB_ENV
+          fi
       - uses: github/codeql-action/upload-sarif@v2
-        if: ${{ failure() && steps.lint.conclusion == 'failure' && hasFiles('build/reports/detekt/detekt.sarif') }}
+        if: ${{ failure() && steps.lint.conclusion == 'failure' && steps.checkDetektFile.outputs.exists == 'true' }}
         with:
           sarif_file: build/reports/detekt/detekt.sarif
