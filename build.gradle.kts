@@ -11,31 +11,27 @@ plugins {
 }
 
 detekt {
-    val targetDir = listOf("backend").flatMap {
+    val targetDir = project.allprojects.flatMap {
         listOf(
-            "$it/src/main/kotlin",
-            "$it/src/test/kotlin",
+            "${it.projectDir}/src/main/kotlin",
+            "${it.projectDir}/src/test/kotlin",
         )
     }
     buildUponDefaultConfig = true
     allRules = false
-    source = files(targetDir)
-    config = files("$rootDir/config/detekt/detekt.yml")
+    source.from(files(targetDir))
+    config.from(files("$rootDir/config/detekt/detekt.yml"))
     baseline = file("$rootDir/config/detekt/baseline.xml")
     basePath = projectDir.path
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
     reports {
-        html.required.set(true) // observe findings in your browser with structure and code snippets
-        xml.required.set(true) // checkstyle like format mainly for integrations like Jenkins
-        txt.required.set(true) // similar to the console output, contains issue signature to manually edit baseline files
-        sarif.required.set(true) // standardized SARIF format (https://sarifweb.azurewebsites.net/) to support integrations with Github Code Scanning
-        sarif {
-            required.set(true)
-            outputLocation.set(file("/tmp/report/detekt.sarif"))
-        }
-        md.required.set(true) // simple Markdown format
+        html.required.set(false)
+        xml.required.set(false)
+        txt.required.set(false)
+        sarif.required.set(true)
+        md.required.set(false) // simple Markdown format
     }
 }
 
