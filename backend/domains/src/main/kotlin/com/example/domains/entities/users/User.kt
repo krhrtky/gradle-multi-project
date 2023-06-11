@@ -23,11 +23,13 @@ class User private constructor(
                 .let(::listOf)
         )
 
-    fun <T> map(mapper: (
-        id: String,
-        name: String,
-        email: String,
-    ) -> T ) : T = mapper(
+    fun <T> map(
+        mapper: (
+            id: String,
+            name: String,
+            email: String,
+        ) -> T
+    ): T = mapper(
         id,
         name,
         email,
@@ -52,7 +54,7 @@ class User private constructor(
         this.event + event,
     )
 
-    private class EventAlreadyConsumedException: Exception("Event has already consumed.")
+    private class EventAlreadyConsumedException : Exception("Event has already consumed.")
 
     companion object {
         fun create(
@@ -93,10 +95,10 @@ interface UserDomainEvent
 data class UserCreatedEvent(
     val userId: String,
     val email: String,
-): UserDomainEvent
+) : UserDomainEvent
 
 data class UserEmailUpdatedEvent(
     val userId: String,
     val beforeEmail: String,
     val afterEmail: String,
-): UserDomainEvent
+) : UserDomainEvent

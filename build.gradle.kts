@@ -1,5 +1,5 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
@@ -17,12 +17,17 @@ detekt {
             "${it.projectDir}/src/test/kotlin",
         )
     }
+    autoCorrect = true
+    parallel = true
     buildUponDefaultConfig = true
     allRules = false
     source.from(files(targetDir))
     config.from(files("$rootDir/config/detekt/detekt.yml"))
     baseline = file("$rootDir/config/detekt/baseline.xml")
     basePath = projectDir.path
+}
+dependencies {
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.0")
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {

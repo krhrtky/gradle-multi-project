@@ -2,9 +2,9 @@ package com.example.applications.controllers.users
 
 import com.example.domains.applications.users.UserApplicationService
 import com.example.domains.applications.users.UserCreateInput
+import org.springframework.http.ResponseEntity.internalServerError
 import org.springframework.http.ResponseEntity.notFound
 import org.springframework.http.ResponseEntity.ok
-import org.springframework.http.ResponseEntity.internalServerError
 import org.springframework.lang.NonNull
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -20,7 +20,7 @@ class UserController(
     private val service: UserApplicationService,
 ) {
     @GetMapping("/{id}")
-    fun find(@PathVariable id: String)=
+    fun find(@PathVariable id: String) =
         service
             .find(id)
             .map(::ok)
@@ -31,7 +31,7 @@ class UserController(
         requestBody
             .let {
                 UserCreateInput(
-                    name =  it.name,
+                    name = it.name,
                     email = it.email,
                 )
             }

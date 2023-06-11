@@ -12,5 +12,5 @@ open class AppApplication
 
 @Suppress("SpreadOperator")
 fun main(args: Array<String>) {
-  runApplication<AppApplication>(*args)
+    runApplication<AppApplication>(*args)
 }
