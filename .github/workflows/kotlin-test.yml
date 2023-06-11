@@ -6,10 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
+      - uses: docker/setup-buildx-action@v2
+      - uses: docker/build-push-action@v4
         with:
-          distribution: corretto
-          java-version: 17
+          context: .
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       - name: docker setup
         id: dockerSetup
         shell: sh
@@ -19,11 +21,14 @@ jobs:
         shell: sh
         run: |
           make db-migrate-local
+      - uses: actions/setup-java@v3
+        with:
+          distribution: corretto
+          java-version: 17
       - name: Setup and execute Gradle 'test' task
         id: lint
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: detekt
+        run: |
+          ./gradlew detekt
       - name: Check detekt file exists
         id: checkDetektFile
         run: |
@@ -34,9 +39,8 @@ jobs:
           fi
       - name: Unit test
         id: unitTest
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: test
+        run: |
+          ./gradlew test
       - uses: github/codeql-action/upload-sarif@v2
         if: ${{ failure() && steps.lint.conclusion == 'failure' && steps.checkDetektFile.outputs.exists == 'true' }}
         with:
