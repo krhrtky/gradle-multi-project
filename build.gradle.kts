@@ -1,6 +1,5 @@
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
     kotlin("jvm") version libs.versions.kotlin
@@ -76,6 +75,6 @@ subprojects {
     }
 }
 
-tasks.withType<BootRun> {
+tasks.named("build") {
     dependsOn("generateJooq")
 }

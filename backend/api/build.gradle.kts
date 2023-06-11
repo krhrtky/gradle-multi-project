@@ -26,3 +26,7 @@ tasks.generateJava {
     schemaPaths = mutableListOf("${rootProject.projectDir}/schema.graphql")
     packageName = "com.example.applications.graphql"
 }
+
+tasks.named("build") {
+    dependsOn("generateJava")
+}
