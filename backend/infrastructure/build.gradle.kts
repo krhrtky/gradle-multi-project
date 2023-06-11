@@ -75,18 +75,6 @@ jooq {
     }
 }
 
-tasks.named("build") {
-    dependsOn("generateJooq")
-}
-
-tasks.named("bootJar") {
-    dependsOn("generateJooq")
-}
-
-tasks.named("bootRun") {
-    dependsOn("generateJooq")
-}
-
-tasks.named("test") {
+tasks.build {
     dependsOn("generateJooq")
 }
