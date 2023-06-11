@@ -15,9 +15,6 @@ jobs:
         shell: sh
         run: |
           docker compose up -d
-      - name: prepare
-        shell: sh
-        run: |
           make db-migrate-local
       - name: Setup and execute Gradle 'test' task
         id: lint
