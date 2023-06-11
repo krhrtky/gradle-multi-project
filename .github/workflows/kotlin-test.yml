@@ -14,7 +14,7 @@ jobs:
         id: dockerSetup
         shell: sh
         run: |
-          docker compose up -d --wait
+          docker compose up -d db --wait
       - name: prepare
         shell: sh
         run: |
