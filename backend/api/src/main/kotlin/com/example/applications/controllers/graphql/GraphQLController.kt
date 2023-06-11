@@ -16,9 +16,9 @@ class GraphQLController(
     @DgsQuery
     fun fetchUser(@InputArgument id: String): User? =
         service
-                .find(id)
-                .getOrNull()
-                ?.map(::User)
+            .find(id)
+            .getOrNull()
+            ?.map(::User)
 
     @DgsMutation
     fun createUser(@InputArgument input: CreateUserInput): User =
