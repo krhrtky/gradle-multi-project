@@ -10,6 +10,11 @@ jobs:
         with:
           distribution: corretto
           java-version: 17
+      - name: docker setup
+        id: dockerSetup
+        shell: sh
+        run: |
+          docker compose up -d
       - name: Setup and execute Gradle 'test' task
         id: lint
         uses: gradle/gradle-build-action@v2
