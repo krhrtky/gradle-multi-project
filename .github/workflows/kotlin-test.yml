@@ -23,6 +23,11 @@ jobs:
           else
             echo "exists=false" >> $GITHUB_ENV
           fi
+      - name: Unit test
+        id: unitTest
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: test
       - uses: github/codeql-action/upload-sarif@v2
         if: ${{ failure() && steps.lint.conclusion == 'failure' && steps.checkDetektFile.outputs.exists == 'true' }}
         with:
