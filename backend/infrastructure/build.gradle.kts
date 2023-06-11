@@ -66,11 +66,27 @@ jooq {
                     }
                     target.apply {
                         packageName = "com.example.infrastructure.db"
-                        directory ="${projectDir}/build/jooq/main"
+                        directory = "$projectDir/build/jooq/main"
                     }
                     strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
                 }
             }
         }
     }
+}
+
+tasks.named("build") {
+    dependsOn("generateJooq")
+}
+
+tasks.named("bootJar") {
+    dependsOn("generateJooq")
+}
+
+tasks.named("bootRun") {
+    dependsOn("generateJooq")
+}
+
+tasks.named("test") {
+    dependsOn("generateJooq")
 }

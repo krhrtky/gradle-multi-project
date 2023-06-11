@@ -30,3 +30,15 @@ tasks.generateJava {
 tasks.named("build") {
     dependsOn("generateJava")
 }
+
+tasks.named("bootJar") {
+    dependsOn("generateJava")
+}
+
+tasks.named("bootRun") {
+    dependsOn("generateJava")
+}
+
+tasks.named("test") {
+    dependsOn("generateJava")
+}

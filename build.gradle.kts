@@ -74,7 +74,3 @@ subprojects {
         useJUnitPlatform()
     }
 }
-
-tasks.named("build") {
-    dependsOn("generateJooq")
-}
