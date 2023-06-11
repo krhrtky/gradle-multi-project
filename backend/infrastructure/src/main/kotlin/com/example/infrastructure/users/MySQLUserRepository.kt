@@ -46,6 +46,5 @@ class MySQLUserRepository(
                     .set(USER.UPDATED_AT, LocalDateTime.now())
                     .execute()
             }
-
     }
 }

@@ -19,6 +19,7 @@ dependencies {
 
     testImplementation(libs.spring.starter.test) {
         exclude("org.junit.vintage:junit-vintage-engine")
+        exclude(module = "mockito-core")
     }
     testImplementation(kotlin("test"))
 
@@ -65,11 +66,15 @@ jooq {
                     }
                     target.apply {
                         packageName = "com.example.infrastructure.db"
-                        directory ="${projectDir}/build/jooq/main"
+                        directory = "$projectDir/build/jooq/main"
                     }
                     strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
                 }
             }
         }
     }
+}
+
+tasks.build {
+    dependsOn("generateJooq")
 }

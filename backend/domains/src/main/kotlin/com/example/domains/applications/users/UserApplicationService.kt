@@ -14,18 +14,17 @@ class UserApplicationService(
         ?: Result
             .failure(UserDoesNotFindException("User(id = $id) does not exists."))
 
-    fun create(input: UserCreateInput) =
-        {
-            input
-                .let {
-                    User.create(input.name, input.email)
-                }
-                .apply(repository::save)
-        }
-            .let(::runCatching)
+    fun create(input: UserCreateInput) = {
+        input
+            .let {
+                User.create(input.name, input.email)
+            }
+            .apply(repository::save)
+    }
+        .let(::runCatching)
 }
 
-class UserDoesNotFindException(override val message: String?): Exception(message)
+class UserDoesNotFindException(override val message: String?) : Exception(message)
 
 data class UserCreateInput(
     val name: String,
