@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
-    id("com.netflix.dgs.codegen") version "5.11.1"
+    id("com.netflix.dgs.codegen") version "5.12.2"
 }
 
 dependencies {
