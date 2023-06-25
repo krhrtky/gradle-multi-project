@@ -23,7 +23,7 @@ jobs:
         run: echo ::set-output name=diff::$(git diff --name-only  | grep 'backend\/.*\/src\/.*\.kt$' || echo "true")
 
       - name: Build Docker image with custom tag
-        if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.tag) ||  }}
+        if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.tag) || steps.diff-check.outputs.diff == 'true' }}
         run: docker build -t api:${{ github.event.inputs.tag }} .
 
       #- name: Semantic Versioning
