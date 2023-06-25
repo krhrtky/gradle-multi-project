@@ -22,6 +22,10 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
+tasks.bootJar {
+    archiveFileName.set("api.jar")
+}
+
 tasks.generateJava {
     schemaPaths = mutableListOf("${rootProject.projectDir}/schema.graphql")
     packageName = "com.example.applications.graphql"
