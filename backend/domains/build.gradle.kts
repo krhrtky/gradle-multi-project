@@ -1,5 +1,3 @@
-import org.springframework.boot.gradle.tasks.bundling.BootJar
-
 plugins {
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
@@ -18,10 +16,6 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
-tasks.getByName<BootJar>("bootJar") {
+tasks.bootJar {
     enabled = false
-}
-
-tasks.getByName<Jar>("jar") {
-    enabled = true
 }

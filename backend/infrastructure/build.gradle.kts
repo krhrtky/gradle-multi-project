@@ -1,6 +1,5 @@
 import nu.studer.gradle.jooq.JooqEdition
 import org.jooq.meta.jaxb.Logging
-import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     alias(libs.plugins.spring.boot)
@@ -25,14 +24,6 @@ dependencies {
 
     runtimeOnly("com.mysql:mysql-connector-j:8.0.33")
     jooqGenerator("com.mysql:mysql-connector-j:8.0.33")
-}
-
-tasks.getByName<BootJar>("bootJar") {
-    enabled = false
-}
-
-tasks.getByName<Jar>("jar") {
-    enabled = true
 }
 
 val jooqVersion = rootProject.dependencyManagement.importedProperties["jooq.version"]
@@ -73,6 +64,10 @@ jooq {
             }
         }
     }
+}
+
+tasks.bootJar {
+    enabled = false
 }
 
 tasks.build {

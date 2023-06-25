@@ -1,0 +1,43 @@
+name: Docker Image Build & Push
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag for image'
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Check for code differences
+        id: diff-check
+        run: echo ::set-output name=diff::$(git diff --name-only  | grep 'backend\/.*\/src\/.*\.kt$' || echo "true")
+
+      - name: Build Docker image with custom tag
+        if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.tag) ||  }}
+        run: docker build -t api:${{ github.event.inputs.tag }} .
+
+      #- name: Semantic Versioning
+      #  id: semver
+      #  run: |
+      #    # Perform semantic versioning calculations and output the result
+      #    echo ::set-output name=tag::$(YOUR_SEMANTIC_VERSIONING_LOGIC_HERE)
+
+      #- name: Build Docker image with semantic version tag
+      #  if: ${{ github.event_name == 'push' && steps.diff-check.outputs.diff == 'true' }}
+      #  run: docker build -t api:${{ steps.semver.outputs.tag }} .
+
+      - name: Configure Docker credentials
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      - name: Push Docker image to GitHub Packages
+        run: docker push docker.pkg.github.com/${{ github.repository }}/api
