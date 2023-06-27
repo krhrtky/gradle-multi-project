@@ -24,7 +24,7 @@ jobs:
 
       - name: Build Docker image with custom tag
         if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.tag) || steps.diff.outputs.diff == 'true' }}
-        run: docker build -t api:${{ github.event.inputs.tag }} -f backend/api/ .
+        run: docker build --no-cache -t api:${{ github.event.inputs.tag }} -f backend/api/ .
 
       #- name: Semantic Versioning
       #  id: semver
