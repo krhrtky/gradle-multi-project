@@ -22,10 +22,6 @@ jobs:
         id: diff
         run: echo ::set-output name=diff::$(git diff --name-only  | grep 'backend\/.*\/src\/.*\.kt$' || echo "true")
 
-      - name: Build Docker image with custom tag
-        if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.tag) || steps.diff.outputs.diff == 'true' }}
-        run: docker build --no-cache -t api:${{ github.event.inputs.tag }} -f backend/api/ .
-
       #- name: Semantic Versioning
       #  id: semver
       #  run: |
@@ -37,7 +33,7 @@ jobs:
       #  run: docker build -t api:${{ steps.semver.outputs.tag }} .
 
       - name: Log in to the Container registry
-        uses: docker/login-action@2.2
+        uses: docker/login-action@2
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -45,13 +41,13 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@4.6
+        uses: docker/metadata-action@4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@4.1.1
+        uses: docker/build-push-action@4
         with:
-          context: .
+          file: {context}/backend/api/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
