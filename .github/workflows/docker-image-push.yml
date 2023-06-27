@@ -36,8 +36,22 @@ jobs:
       #  if: ${{ github.event_name == 'push' && steps.diff-check.outputs.diff == 'true' }}
       #  run: docker build -t api:${{ steps.semver.outputs.tag }} .
 
-      - name: Configure Docker credentials
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+      - name: Log in to the Container registry
+        uses: docker/login-action@2.2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Push Docker image to GitHub Packages
-        run: docker push docker.pkg.github.com/${{ github.repository }}/api
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@4.6
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@4.1.1
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
