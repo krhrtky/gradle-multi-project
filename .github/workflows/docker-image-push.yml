@@ -48,6 +48,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@4
         with:
-          file: {context}/backend/api/Dockerfile
+          file: "{context}/backend/api/Dockerfile"
           push: true
           tags: ${{ steps.meta.outputs.tags }}
