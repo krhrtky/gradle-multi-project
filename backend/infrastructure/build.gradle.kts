@@ -1,5 +1,4 @@
 import nu.studer.gradle.jooq.JooqEdition
-import nu.studer.gradle.jooq.JooqGenerate
 import org.jooq.meta.jaxb.Logging
 
 plugins {
@@ -47,9 +46,9 @@ jooq {
                     password = "password"
                 }
                 generator.apply {
-                    name = "org.jooq.codegen.KotlinGenerator"
+                    name = org.jooq.codegen.KotlinGenerator::class.java.canonicalName
                     database.apply {
-                        name = "org.jooq.meta.mysql.MySQLDatabase"
+                        name = org.jooq.meta.mysql.MySQLDatabase::class.java.canonicalName
                         inputSchema = "app"
                     }
                     generate.apply {
@@ -63,7 +62,7 @@ jooq {
                         packageName = "com.example.infrastructure.db"
                         directory = "$projectDir/build/jooq/main"
                     }
-                    strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
+                    strategy.name = org.jooq.codegen.DefaultGeneratorStrategy::class.java.canonicalName
                 }
             }
         }

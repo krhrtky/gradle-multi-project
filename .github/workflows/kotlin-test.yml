@@ -18,7 +18,7 @@ jobs:
       - name: prepare
         shell: sh
         run: |
-          make db-migrate-local
+          make setup
       - name: Setup and execute Gradle 'test' task
         id: lint
         uses: gradle/gradle-build-action@v2
