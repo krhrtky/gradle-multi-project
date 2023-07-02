@@ -1,7 +1,7 @@
 .PHONY: db-up, setup, db-migrate-local, db-migrate-remote,db-codegen, api-image
 
 db-up:
-	compose up db -d
+	docker compose up db -d
 
 setup: db-up db-migrate-local db-codegen
 
