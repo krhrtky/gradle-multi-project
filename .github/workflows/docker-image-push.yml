@@ -33,13 +33,9 @@ jobs:
         run: |
           docker compose up -d db --wait
 
-      - name: migrate
+      - name: setup
         shell: sh
-        run: make db-migrate-local
-
-      - name: jooqCodeGen
-        shell: sh
-        run: make db-codegen
+        run: make setup
 
       - name: Log in to the Container registry
         uses: docker/login-action@v2

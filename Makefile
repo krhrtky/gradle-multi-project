@@ -1,9 +1,9 @@
-.PHONY: db-up, migration, db-migrate-local, db-migrate-remote,db-codegen, api-image
+.PHONY: db-up, setup, db-migrate-local, db-migrate-remote,db-codegen, api-image
 
 db-up:
 	compose up db -d
 
-migration: db-migrate-local db-codegen
+setup: db-up db-migrate-local db-codegen
 
 DB_MIGRATE_COMMAND = docker compose run --rm sqldef mysqldef
 
