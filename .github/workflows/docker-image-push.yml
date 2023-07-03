@@ -1,14 +1,11 @@
 name: Docker Image Build & Push
 
 on:
-  push:
-    branches:
-      - master
   workflow_dispatch:
     inputs:
       tag:
         description: 'Tag for image'
-        required: false
+        required: true
 
 jobs:
   build:
@@ -51,4 +48,4 @@ jobs:
           file: ./backend/api/Dockerfile
           push: true
           no-cache: true
-          tags: ghcr.io/${{ github.actor }}/gradle-multi-project-api:${{ github.sha }}
+          tags: ghcr.io/${{ github.actor }}/gradle-multi-project-api:${{ github.event.inputs.tag }}
