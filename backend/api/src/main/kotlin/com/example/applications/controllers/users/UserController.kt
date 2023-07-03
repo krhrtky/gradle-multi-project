@@ -2,8 +2,10 @@ package com.example.applications.controllers.users
 
 import com.example.domains.applications.users.UserApplicationService
 import com.example.domains.applications.users.UserCreateInput
+import org.springframework.http.HttpStatus
+import org.springframework.http.ProblemDetail
 import org.springframework.http.ResponseEntity.internalServerError
-import org.springframework.http.ResponseEntity.notFound
+import org.springframework.http.ResponseEntity.of
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.lang.NonNull
 import org.springframework.web.bind.annotation.GetMapping
@@ -24,7 +26,12 @@ class UserController(
         service
             .find(id)
             .map(::ok)
-            .getOrElse { notFound().build() }
+            .getOrElse {
+                ProblemDetail
+                    .forStatusAndDetail(HttpStatus.NOT_FOUND, it.message ?: "")
+                    .let(::of)
+                    .build()
+            }
 
     @PostMapping
     fun create(@RequestBody requestBody: CreateRequestBody) =
