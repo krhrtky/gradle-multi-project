@@ -17,9 +17,14 @@ jobs:
         with:
           filters: |
             api:
+              - 'gradle/libs.versions.toml'
+              - 'build.gradle.kts'
               - 'backend/api/src/main/**'
+              - 'backend/api/build.gradle.kts'
               - 'backend/domains/src/main/**'
+              - 'backend/domains/build.gradle.kts'
               - 'backend/infrastructure/src/main/**'
+              - 'backend/infrastructure/build.gradle.kts'
               - 'docker/sqldef/volume/schema.sql'
       - name: Release API
         if: steps.changes.outputs.api == 'true'
