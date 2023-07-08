@@ -45,7 +45,10 @@ class UserController(
             .let(service::create)
             .map(::ok)
             .getOrElse {
-                internalServerError().build()
+                ProblemDetail
+                    .forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, it.message ?: "")
+                    .let(::of)
+                    .build()
             }
 }
 
