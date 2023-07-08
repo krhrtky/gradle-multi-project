@@ -28,6 +28,6 @@ jobs:
               - 'docker/sqldef/volume/schema.sql'
       - name: Release API
         if: steps.changes.outputs.api == 'true'
-        uses: ../.github/workflows/docker-image-push.yml
+        uses: ./.github/workflows/docker-image-push.yml
         with:
           tag: ${{ github.sha }}

@@ -1,10 +1,17 @@
 name: Docker Image Build & Push
 
 on:
+  workflow_call:
+    inputs:
+      tag:
+        description: 'Tag for image'
+        type: string
+        required: true
   workflow_dispatch:
     inputs:
       tag:
         description: 'Tag for image'
+        type: string
         required: true
 
 jobs:
