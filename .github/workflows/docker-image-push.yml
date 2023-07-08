@@ -31,16 +31,6 @@ jobs:
         id: diff
         run: echo ::set-output name=diff::$(git diff --name-only  | grep 'backend\/.*\/src\/.*\.kt$' || echo "true")
 
-      - name: docker setup
-        id: dockerSetup
-        shell: sh
-        run: |
-          docker compose up -d db --wait
-
-      - name: setup
-        shell: sh
-        run: make setup
-
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
