@@ -1,5 +1,6 @@
 import nu.studer.gradle.jooq.JooqEdition
 import org.jooq.meta.jaxb.Logging
+import org.jooq.meta.jaxb.Property
 
 plugins {
     alias(libs.plugins.spring.boot)
@@ -24,6 +25,7 @@ dependencies {
 
     runtimeOnly("com.mysql:mysql-connector-j:8.0.33")
     jooqGenerator("com.mysql:mysql-connector-j:8.0.33")
+    jooqGenerator("org.jooq:jooq-meta-extensions")
 }
 
 val jooqVersion = rootProject.dependencyManagement.importedProperties["jooq.version"]
@@ -35,21 +37,18 @@ jooq {
     configurations {
         create("main") {
 
-            generateSchemaSourceOnCompilation.set(false)
-
             jooqConfiguration.apply {
                 logging = Logging.WARN
-                jdbc.apply {
-                    driver = "com.mysql.cj.jdbc.Driver"
-                    url = "jdbc:mysql://localhost:3306/app"
-                    user = "root"
-                    password = "password"
-                }
                 generator.apply {
                     name = org.jooq.codegen.KotlinGenerator::class.java.canonicalName
                     database.apply {
-                        name = org.jooq.meta.mysql.MySQLDatabase::class.java.canonicalName
-                        inputSchema = "app"
+                        name = "org.jooq.meta.extensions.ddl.DDLDatabase"
+                        properties = listOf(
+                            Property().apply {
+                                key = "scripts"
+                                value = "../../docker/sqldef/volume/schema.sql"
+                            }
+                        )
                     }
                     generate.apply {
                         isRecords = true
