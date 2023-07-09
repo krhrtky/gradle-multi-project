@@ -27,10 +27,6 @@ jobs:
           distribution: corretto
           java-version: 17
 
-      - name: Check for code differences
-        id: diff
-        run: echo ::set-output name=diff::$(git diff --name-only  | grep 'backend\/.*\/src\/.*\.kt$' || echo "true")
-
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
