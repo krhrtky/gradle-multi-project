@@ -45,6 +45,7 @@ jooq {
                         name = "org.jooq.meta.extensions.ddl.DDLDatabase"
                         properties = listOf(
                             Property().apply {
+                                // @see https://www.jooq.org/doc/latest/manual/code-generation/codegen-ddl/
                                 key = "scripts"
                                 value = "../../docker/sqldef/volume/schema.sql"
                             }
