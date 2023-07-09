@@ -8,7 +8,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     outputs:
-      api: steps.changes.outputs.api
+      api: ${{ steps.changes.outputs.api }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -32,7 +32,7 @@ jobs:
               - 'docker/sqldef/volume/schema.sql'
   push-api-image:
     needs: [check]
-    if: needs.check.outputs.api == 'true'
+    if: ${{ needs.check.outputs.api == 'true' }}
     uses: ./.github/workflows/docker-image-push.yml
     with:
       tag: ${{ github.sha }}
