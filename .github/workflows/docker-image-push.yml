@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - run: |
-          echo "tag: ${{ github.event.inputs.tag }}"
+          echo "tag: ${{ inputs.tag }}"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
@@ -48,4 +48,4 @@ jobs:
           file: ./backend/api/Dockerfile
           push: true
           no-cache: true
-          tags: ghcr.io/${{ github.actor }}/gradle-multi-project-api:${{ github.event.inputs.tag }}
+          tags: ghcr.io/${{ github.actor }}/gradle-multi-project-api:${{ inputs.tag }}
