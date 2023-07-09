@@ -14,8 +14,7 @@ class MySQLUserRepository(
 ) : UserRepository {
     override fun find(id: String) =
         context
-            .select(USER.asterisk())
-            .from(USER)
+            .selectFrom(USER)
             .where(
                 USER.ID.eq(id)
             )
