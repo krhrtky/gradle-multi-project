@@ -16,6 +16,7 @@ jobs:
     steps:
 
     - name: Get dates for last month
+      id: date
       shell: bash
       run: |
         # Calculate the first day of the previous month
@@ -32,7 +33,7 @@ jobs:
       uses: github/issue-metrics@v2
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SEARCH_QUERY: 'repo:owner/repo is:pr created:${{ env.last_month }} -reason:"not planned"'
+        SEARCH_QUERY: 'repo:owner/repo is:pr created:${{ steps..date.outputs.last_month }} -reason:"not planned"'
 
     - name: Create issue
       uses: peter-evans/create-issue-from-file@v4
