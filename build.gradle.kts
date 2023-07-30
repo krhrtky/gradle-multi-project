@@ -37,6 +37,7 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
         sarif.required.set(true)
         md.required.set(false) // simple Markdown format
     }
+    jvmTarget = "17"
 }
 
 tasks.withType<DetektCreateBaselineTask>().configureEach {
