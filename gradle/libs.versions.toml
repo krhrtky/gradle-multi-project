@@ -4,7 +4,7 @@ springBoot = "3.1.2"
 springDependencyManagement = "1.1.2"
 detekt = "1.23.0"
 archUnit = "1.0.1"
-dgs = "7.3.0"
+dgs = "7.3.6"
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
