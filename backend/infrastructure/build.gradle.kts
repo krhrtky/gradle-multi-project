@@ -23,8 +23,8 @@ dependencies {
     }
     testImplementation(kotlin("test"))
 
-    runtimeOnly("com.mysql:mysql-connector-j:8.0.33")
-    jooqGenerator("com.mysql:mysql-connector-j:8.0.33")
+    runtimeOnly("com.mysql:mysql-connector-j:8.1.0")
+    jooqGenerator("com.mysql:mysql-connector-j:8.1.0")
     jooqGenerator("org.jooq:jooq-meta-extensions")
 }
 
