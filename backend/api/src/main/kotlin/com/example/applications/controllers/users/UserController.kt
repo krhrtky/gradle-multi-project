@@ -5,6 +5,10 @@ import com.example.domains.applications.users.UserCreateInput
 import com.example.infrastructure.users.AllUsersCondition
 import com.example.infrastructure.users.UserQueryService
 import com.example.infrastructure.users.Users
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.responses.ApiResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ProblemDetail
 import org.springframework.http.ResponseEntity.of
@@ -54,6 +58,23 @@ class UserController(
                     .let(::of)
                     .build()
             }
+
+    @GetMapping
+    @Operation(
+        summary = "ユーザー一覧",
+        tags = ["user"],
+        description = "ユーザー一覧",
+    )
+    @ApiResponse(
+        responseCode = "200",
+        description = "ユーザー一覧",
+        content = [
+            Content(
+                mediaType = "application/json",
+                schema = Schema(implementation = Users::class),
+            )
+        ]
+    )
     fun list(
         @RequestParam("limit") limit: Long?,
         @RequestParam("offset") offset: Long?,
