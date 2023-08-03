@@ -2,6 +2,9 @@ package com.example.applications.controllers.users
 
 import com.example.domains.applications.users.UserApplicationService
 import com.example.domains.applications.users.UserCreateInput
+import com.example.infrastructure.users.AllUsersCondition
+import com.example.infrastructure.users.UserQueryService
+import com.example.infrastructure.users.Users
 import org.springframework.http.HttpStatus
 import org.springframework.http.ProblemDetail
 import org.springframework.http.ResponseEntity.of
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
@@ -19,6 +23,7 @@ import java.util.*
 @RequestMapping("/users")
 class UserController(
     private val service: UserApplicationService,
+    private val queryService: UserQueryService,
 ) {
     @GetMapping("/{id}")
     fun find(@PathVariable id: String) =
@@ -49,6 +54,15 @@ class UserController(
                     .let(::of)
                     .build()
             }
+    fun list(
+        @RequestParam("limit") limit: Long?,
+        @RequestParam("offset") offset: Long?,
+    ) = AllUsersCondition(
+        limit = limit ?: 10,
+        offset = offset ?: 0,
+    )
+        .let(queryService::allUsers)
+        .let(::ok)
 }
 
 data class CreateRequestBody(
