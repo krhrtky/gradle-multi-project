@@ -1,3 +1,9 @@
 dgs:
   graphql:
     schema-locations: "file:../../schema.graphql"
+springdoc:
+  paths-to-exclude:
+    - /graphql
+    - /schema.json
+  cache:
+    disabled: true
