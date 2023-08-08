@@ -32,6 +32,13 @@ class UserController(
     fun find(@PathVariable id: String) =
         service
             .find(id)
+            .map {
+                FindUserSuccessResponse(
+                    id = it.id,
+                    name = it.name,
+                    email = it.email,
+                )
+            }
             .map(::ok)
             .getOrElse {
                 ProblemDetail
@@ -50,6 +57,11 @@ class UserController(
                 )
             }
             .let(service::create)
+            .map {
+                CreateUserSuccessResponse(
+                    it.id
+                )
+            }
             .map(::ok)
             .getOrElse {
                 ProblemDetail
@@ -84,6 +96,16 @@ class UserController(
         .let(queryService::allUsers)
         .let(::ok)
 }
+
+data class FindUserSuccessResponse(
+    val id: String,
+    val name: String,
+    val email: String,
+)
+
+data class CreateUserSuccessResponse(
+    val id: String,
+)
 
 data class CreateRequestBody(
     @NonNull val name: String,
