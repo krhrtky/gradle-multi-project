@@ -18,3 +18,9 @@ db-codegen:
 
 graphql-codegen:
 	./gradlew backend:api:generateJava
+
+open-api-schema-gen:
+	./gradlew backend:api:generateOpenApiDocs
+
+open-api-client-gen: open-api-schema-gen
+	cd front/app && pnpm orval --config ./orval.config.ts &&  cd ../../

@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+openapi.json
+/front/app/src/libs/api/generated/

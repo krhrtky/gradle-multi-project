@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
     id("com.netflix.dgs.codegen") version "5.12.4"
+    id("org.springdoc.openapi-gradle-plugin") version "1.6.0"
 }
 
 dependencies {
@@ -12,6 +13,7 @@ dependencies {
     implementation(libs.kotlin.stdlib)
     implementation(platform(libs.graphql.dgs.platform))
     implementation(libs.graphql.dgs.spring.boot)
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.1.0")
     implementation(project(":backend:domains"))
     implementation(project(":backend:infrastructure"))
     testImplementation(libs.spring.starter.test) {
@@ -33,4 +35,8 @@ tasks.generateJava {
 
 tasks.build {
     dependsOn("generateJava")
+}
+
+openApi {
+    outputDir = rootDir
 }
