@@ -1,4 +1,4 @@
-.PHONY: db-up, setup, db-migrate-local, db-migrate-remote,db-codegen, api-image
+.PHONY: db-up, setup, db-migrate-local, db-migrate-remote,db-codegen, api-image, start-backend, start-frontend
 
 db-up:
 	docker compose up db -d
@@ -24,3 +24,9 @@ open-api-schema-gen:
 
 open-api-client-gen: open-api-schema-gen
 	cd front/app && pnpm orval --config ./orval.config.ts &&  cd ../../
+
+start-backend:
+	./gradlew backend:api:bootRun
+
+start-frontend:
+	pnpm recursive run dev --filter front/app
