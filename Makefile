@@ -1,4 +1,4 @@
-.PHONY: db-up, setup, db-migrate-local, db-migrate-remote,db-codegen, api-image, start-backend, start-frontend
+.PHONY: db-up, setup, db-migrate-local, db-migrate-remote,db-codegen, api-image, start-backend, start-frontend, build-backend, build-frontend
 
 db-up:
 	docker compose up db -d
@@ -30,3 +30,9 @@ start-backend:
 
 start-frontend:
 	pnpm recursive run dev --filter front/app
+
+build-backend:
+	./gradlew backend:api:bootJar
+
+build-frontend:
+	pnpm recursive run build --filter front/app
