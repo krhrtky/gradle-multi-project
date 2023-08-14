@@ -5,7 +5,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     outputs:
-      api: ${{ steps.changes.outputs.api }}
+      front: ${{ steps.changes.outputs.front }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
