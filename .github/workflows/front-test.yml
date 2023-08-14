@@ -38,6 +38,7 @@ jobs:
         with:
           node-version-file: .tool-versions
           cache: pnpm
+          cache-dependency-path: front/app/pnpm-lock.yaml
       - name: docker setup
         id: dockerSetup
         shell: sh
