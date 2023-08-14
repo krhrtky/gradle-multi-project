@@ -1,9 +1,9 @@
-.PHONY: db-up, setup, db-migrate-local, db-migrate-remote,db-codegen, api-image, start-backend, start-frontend, build-backend, build-frontend
+.PHONY: db-up, setup, db-migrate-local, db-migrate-remote,db-codegen, api-image, start-backend, start-frontend, build-backend, build-frontend, setup-frontend, test-frontend
 
 db-up:
 	docker compose up db -d
 
-setup: db-up db-migrate-local db-codegen
+setup: db-up db-migrate-local db-codegen setup-frontend open-api-client-gen
 
 DB_MIGRATE_COMMAND = docker compose run --rm sqldef mysqldef
 
@@ -36,3 +36,6 @@ build-backend:
 
 build-frontend:
 	pnpm recursive run build --filter front/app
+
+test-frontend:
+	pnpm recursive test

@@ -6,6 +6,7 @@ export default defineConfig({
         output: {
             client: "react-query",
             target: "./src/libs/api/generated",
+            mock: true,
         },
     },
 });
