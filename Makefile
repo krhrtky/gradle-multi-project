@@ -34,6 +34,9 @@ start-frontend:
 build-backend:
 	./gradlew backend:api:bootJar
 
+setup-frontend:
+	pnpm recursive install
+
 build-frontend:
 	pnpm recursive run build --filter front/app
 
