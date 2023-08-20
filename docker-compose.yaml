@@ -5,8 +5,10 @@ services:
     volumes:
       - './docker/sqldef/volume:/volume'
     environment:
-      DB_USER: root
-      DB_PASSWORD: password
+      - DB_HOST
+      - DB_USER
+      - DB_PASSWORD
+      - DB_NAME
     depends_on:
       - db
   db:
