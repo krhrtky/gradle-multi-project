@@ -3,7 +3,11 @@
 db-up:
 	docker compose up db -d
 
-setup: db-up db-migrate-local db-codegen setup-frontend open-api-client-gen
+setup: setup-backend setup-frontend
+
+setup-backend: db-up db-migrate-local db-codegen
+
+setup-frontend: open-api-client-gen install-frontend
 
 DB_MIGRATE_COMMAND = docker compose run --rm sqldef mysqldef
 
@@ -34,7 +38,7 @@ start-frontend:
 build-backend:
 	./gradlew backend:api:bootJar
 
-setup-frontend:
+install-frontend:
 	pnpm recursive install
 
 build-frontend:
