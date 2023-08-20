@@ -11,6 +11,12 @@ setup-frontend: open-api-client-gen install-frontend
 
 DB_MIGRATE_COMMAND = docker compose run --rm sqldef mysqldef
 
+dry-db-migrate-local:
+	${DB_MIGRATE_COMMAND} -h db -uroot -ppassword app --file=./volume/schema.sql --dry-run
+
+dry-db-migrate-remote:
+	${DB_MIGRATE_COMMAND} -h ${DB_HOST} -u ${DB_USER} -p ${DB_PASSWORD} ${DB_NAME} --file=./volume/schema.sql --dry-run
+
 db-migrate-local:
 	${DB_MIGRATE_COMMAND} -h db -uroot -ppassword app --file=./volume/schema.sql
 
