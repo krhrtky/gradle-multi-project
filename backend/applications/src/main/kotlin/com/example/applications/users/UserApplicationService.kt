@@ -1,4 +1,4 @@
-package com.example.domains.applications.users
+package com.example.applications.users
 
 import com.example.domains.entities.users.User
 import com.example.domains.entities.users.UserRepository

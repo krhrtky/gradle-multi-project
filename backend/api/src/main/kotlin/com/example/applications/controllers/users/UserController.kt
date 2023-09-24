@@ -1,7 +1,7 @@
 package com.example.applications.controllers.users
 
-import com.example.domains.applications.users.UserApplicationService
-import com.example.domains.applications.users.UserCreateInput
+import com.example.applications.users.UserApplicationService
+import com.example.applications.users.UserCreateInput
 import com.example.infrastructure.users.AllUsersCondition
 import com.example.infrastructure.users.UserQueryService
 import com.example.infrastructure.users.Users
@@ -34,7 +34,7 @@ class UserController(
             .find(id)
             .map {
                 FindUserSuccessResponse(
-                    id = it.id,
+                    id = it.id.value,
                     name = it.name,
                     email = it.email,
                 )
@@ -59,7 +59,7 @@ class UserController(
             .let(service::create)
             .map {
                 CreateUserSuccessResponse(
-                    it.id
+                    it.id.value
                 )
             }
             .map(::ok)

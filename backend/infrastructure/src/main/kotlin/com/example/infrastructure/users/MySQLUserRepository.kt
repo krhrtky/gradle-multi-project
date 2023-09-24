@@ -11,7 +11,7 @@ import java.time.LocalDateTime
 @Repository
 class MySQLUserRepository(
     private val context: DSLContext,
-) : UserRepository {
+) : UserRepository() {
     override fun find(id: String) =
         context
             .selectFrom(USER)
@@ -20,12 +20,11 @@ class MySQLUserRepository(
             )
             .fetchOneInto(USER)
             ?.let {
-                User
-                    .fromRepository(
-                        id = it.id,
-                        name = it.name,
-                        email = it.email,
-                    )
+                mapToEntity(
+                    id = it.id,
+                    name = it.name,
+                    email = it.email,
+                )
             }
 
     override fun save(newUser: User) {
@@ -46,4 +45,6 @@ class MySQLUserRepository(
                     .execute()
             }
     }
+
+
 }

@@ -2,8 +2,8 @@ package com.example.applications.controllers.graphql
 
 import com.example.applications.graphql.types.CreateUserInput
 import com.example.applications.graphql.types.User
-import com.example.domains.applications.users.UserApplicationService
-import com.example.domains.applications.users.UserCreateInput
+import com.example.applications.users.UserApplicationService
+import com.example.applications.users.UserCreateInput
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsMutation
 import com.netflix.graphql.dgs.DgsQuery
