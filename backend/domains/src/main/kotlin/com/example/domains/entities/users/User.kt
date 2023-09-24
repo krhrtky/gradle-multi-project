@@ -21,7 +21,7 @@ class User private constructor(
                 .let(::listOf)
         )
 
-    fun <T> map(
+    internal fun <T> map(
         mapper: (
             id: String,
             name: String,

@@ -1,6 +1,5 @@
 package com.example.infrastructure.users
 
-import com.example.domains.entities.users.User
 import com.example.domains.entities.users.UserRepository
 import com.example.infrastructure.db.tables.User.Companion.USER
 import com.example.infrastructure.db.tables.records.UserRecord
@@ -27,13 +26,13 @@ class MySQLUserRepository(
                 )
             }
 
-    override fun save(newUser: User) {
-        newUser
-            .map { id, name, email ->
+    override fun upsert(raw: UserRaw) {
+        raw
+            .let {
                 UserRecord(
-                    id = id,
-                    name = name,
-                    email = email,
+                    id = it.id,
+                    name = it.name,
+                    email = it.email,
                 )
             }
             .let {
@@ -45,6 +44,4 @@ class MySQLUserRepository(
                     .execute()
             }
     }
-
-
 }
