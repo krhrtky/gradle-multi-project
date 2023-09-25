@@ -1,8 +1,8 @@
 package com.example.applications.controllers.graphql
 
-import com.example.domains.applications.users.UserApplicationService
-import com.example.domains.applications.users.UserDoesNotFindException
-import com.example.domains.entities.users.User
+import com.example.applications.users.UserApplicationService
+import com.example.domains.entities.users.UserDTO
+import com.example.domains.entities.users.UserQueryService
 import com.netflix.graphql.dgs.DgsQueryExecutor
 import com.netflix.graphql.dgs.autoconfig.DgsAutoConfiguration
 import com.ninjasquad.springmockk.MockkBean
@@ -14,8 +14,6 @@ import io.mockk.clearAllMocks
 import io.mockk.every
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import kotlin.Result.Companion.failure
-import kotlin.Result.Companion.success
 import com.example.applications.graphql.types.User as GQLUser
 
 @SpringBootTest(
@@ -28,7 +26,11 @@ class GraphQLControllerTest(
     @Autowired
     private val queryExecutor: DgsQueryExecutor,
     @MockkBean
-    private val userApplicationService: UserApplicationService
+    @Suppress("UnusedPrivateProperty")
+    // 依存関係の解決のために必要
+    private val userApplicationService: UserApplicationService,
+    @MockkBean
+    private val userQueryService: UserQueryService,
 ) : DescribeSpec({
     describe(".fetchUser") {
         beforeEach {
@@ -36,13 +38,13 @@ class GraphQLControllerTest(
         }
         it("return exists user") {
             every {
-                userApplicationService
+                userQueryService
                     .find("2467240f-5d27-4e42-946e-397509a74b7a")
-            } returns User.fromRepository(
+            } returns UserDTO(
                 "2467240f-5d27-4e42-946e-397509a74b7a",
                 "test user",
                 "test.user@example.com",
-            ).let(::success)
+            )
             val query =
                 """
                     query {
@@ -70,9 +72,9 @@ class GraphQLControllerTest(
         }
         it("return null when does not exists user") {
             every {
-                userApplicationService
+                userQueryService
                     .find("2467240f-5d27-4e42-946e-397509a74b7a")
-            } returns failure(UserDoesNotFindException("does not exists"))
+            } returns null
 
             val query =
                 """

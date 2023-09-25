@@ -14,6 +14,7 @@ dependencies {
     implementation(platform(libs.graphql.dgs.platform))
     implementation(libs.graphql.dgs.spring.boot)
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.1.0")
+    implementation(project(":backend:applications"))
     implementation(project(":backend:domains"))
     implementation(project(":backend:infrastructure"))
     testImplementation(libs.spring.starter.test) {

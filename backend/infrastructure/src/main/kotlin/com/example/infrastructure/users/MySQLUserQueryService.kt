@@ -1,14 +1,31 @@
 package com.example.infrastructure.users
 
+import com.example.domains.entities.users.AllUsersCondition
+import com.example.domains.entities.users.UserDTO
+import com.example.domains.entities.users.UserQueryService
+import com.example.domains.entities.users.Users
 import com.example.infrastructure.db.tables.User.Companion.USER
 import org.jooq.DSLContext
 import org.springframework.stereotype.Service
 
 @Service
-class UserQueryService(
+class MySQLUserQueryService(
     private val context: DSLContext,
-) {
-    fun allUsers(condition: AllUsersCondition): Users {
+) : UserQueryService {
+    override fun find(id: String): UserDTO? =
+        context
+            .selectFrom(USER)
+            .where(
+                USER.ID.eq(id)
+            )
+            .fetchOne {
+                UserDTO(
+                    id = it.id,
+                    name = it.name,
+                    email = it.email,
+                )
+            }
+    override fun allUsers(condition: AllUsersCondition): Users {
         val total = context.fetchCount(USER)
         val users = context
             .selectFrom(USER)
@@ -29,19 +46,3 @@ class UserQueryService(
         )
     }
 }
-
-data class AllUsersCondition(
-    val limit: Long,
-    val offset: Long,
-)
-
-data class UserDTO(
-    val id: String,
-    val name: String,
-    val email: String,
-)
-
-data class Users(
-    val total: Long,
-    val users: List<UserDTO>
-)

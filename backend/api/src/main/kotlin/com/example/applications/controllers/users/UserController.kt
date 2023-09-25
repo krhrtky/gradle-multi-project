@@ -1,10 +1,12 @@
 package com.example.applications.controllers.users
 
-import com.example.domains.applications.users.UserApplicationService
-import com.example.domains.applications.users.UserCreateInput
-import com.example.infrastructure.users.AllUsersCondition
-import com.example.infrastructure.users.UserQueryService
-import com.example.infrastructure.users.Users
+import com.example.applications.users.UserApplicationService
+import com.example.applications.users.UserCreateInput
+import com.example.domains.entities.users.AllUsersCondition
+import com.example.domains.entities.users.UserQueryService
+import com.example.domains.entities.users.Users
+import com.github.michaelbull.result.getOrElse
+import com.github.michaelbull.result.map
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
@@ -34,7 +36,7 @@ class UserController(
             .find(id)
             .map {
                 FindUserSuccessResponse(
-                    id = it.id,
+                    id = it.id.value,
                     name = it.name,
                     email = it.email,
                 )
@@ -57,11 +59,7 @@ class UserController(
                 )
             }
             .let(service::create)
-            .map {
-                CreateUserSuccessResponse(
-                    it.id
-                )
-            }
+            .map(::CreateUserSuccessResponse)
             .map(::ok)
             .getOrElse {
                 ProblemDetail

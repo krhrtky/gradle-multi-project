@@ -1,9 +1,7 @@
 package com.example.domains.entities.users
 
-import java.util.UUID
-
 class User private constructor(
-    val id: String,
+    val id: UserID,
     val name: String,
     val email: String,
     private val event: List<UserDomainEvent>,
@@ -16,21 +14,21 @@ class User private constructor(
             email = newEmail,
             event =
             UserEmailUpdatedEvent(
-                id,
+                id.value,
                 email,
                 newEmail,
             )
                 .let(::listOf)
         )
 
-    fun <T> map(
+    internal fun <T> map(
         mapper: (
             id: String,
             name: String,
             email: String,
         ) -> T
     ): T = mapper(
-        id,
+        id.value,
         name,
         email,
     )
@@ -61,28 +59,27 @@ class User private constructor(
             name: String,
             email: String,
         ) =
-            UUID
-                .randomUUID()
-                .toString()
+            UserID
+                .create()
                 .let {
                     User(
                         it,
                         name,
                         email,
                         UserCreatedEvent(
-                            it,
+                            it.value,
                             email,
                         )
                             .let(::listOf)
                     )
                 }
 
-        fun fromRepository(
+        internal fun fromRepository(
             id: String,
             name: String,
             email: String,
         ) = User(
-            id,
+            UserID.fromRepository(id),
             name,
             email,
             emptyList(),

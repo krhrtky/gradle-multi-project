@@ -1,6 +1,5 @@
 package com.example.infrastructure.users
 
-import com.example.domains.entities.users.User
 import com.example.domains.entities.users.UserRepository
 import com.example.infrastructure.db.tables.User.Companion.USER
 import com.example.infrastructure.db.tables.records.UserRecord
@@ -11,7 +10,7 @@ import java.time.LocalDateTime
 @Repository
 class MySQLUserRepository(
     private val context: DSLContext,
-) : UserRepository {
+) : UserRepository() {
     override fun find(id: String) =
         context
             .selectFrom(USER)
@@ -20,21 +19,20 @@ class MySQLUserRepository(
             )
             .fetchOneInto(USER)
             ?.let {
-                User
-                    .fromRepository(
-                        id = it.id,
-                        name = it.name,
-                        email = it.email,
-                    )
+                mapToEntity(
+                    id = it.id,
+                    name = it.name,
+                    email = it.email,
+                )
             }
 
-    override fun save(newUser: User) {
-        newUser
-            .map { id, name, email ->
+    override fun upsert(raw: UserRaw) {
+        raw
+            .let {
                 UserRecord(
-                    id = id,
-                    name = name,
-                    email = email,
+                    id = it.id,
+                    name = it.name,
+                    email = it.email,
                 )
             }
             .let {
