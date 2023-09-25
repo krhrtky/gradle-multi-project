@@ -26,6 +26,8 @@ class GraphQLControllerTest(
     @Autowired
     private val queryExecutor: DgsQueryExecutor,
     @MockkBean
+    @Suppress("UnusedPrivateProperty")
+    // 依存関係の解決のために必要
     private val userApplicationService: UserApplicationService,
     @MockkBean
     private val userQueryService: UserQueryService,
