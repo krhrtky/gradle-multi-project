@@ -1,5 +1,6 @@
 package com.example.applications.controllers.graphql
 
+import com.example.applications.users.UserApplicationService
 import com.example.domains.entities.users.UserDTO
 import com.example.domains.entities.users.UserQueryService
 import com.netflix.graphql.dgs.DgsQueryExecutor
@@ -24,6 +25,8 @@ import com.example.applications.graphql.types.User as GQLUser
 class GraphQLControllerTest(
     @Autowired
     private val queryExecutor: DgsQueryExecutor,
+    @MockkBean
+    private val userApplicationService: UserApplicationService,
     @MockkBean
     private val userQueryService: UserQueryService,
 ) : DescribeSpec({
