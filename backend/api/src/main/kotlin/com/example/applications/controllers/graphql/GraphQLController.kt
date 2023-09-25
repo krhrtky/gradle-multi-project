@@ -36,7 +36,7 @@ class GraphQLController(
             .let(service::create)
             .map {
                 User(
-                    id =  it,
+                    id = it,
                     name = input.name,
                     email = input.email,
                 )

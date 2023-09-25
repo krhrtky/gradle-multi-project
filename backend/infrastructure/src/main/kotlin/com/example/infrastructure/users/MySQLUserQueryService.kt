@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 @Service
 class MySQLUserQueryService(
     private val context: DSLContext,
-) :UserQueryService {
+) : UserQueryService {
     override fun find(id: String): UserDTO? =
         context
             .selectFrom(USER)

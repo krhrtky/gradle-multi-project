@@ -2,8 +2,8 @@ package com.example.applications.controllers.users
 
 import com.example.applications.users.UserApplicationService
 import com.example.applications.users.UserCreateInput
-import com.example.domains.entities.users.UserQueryService
 import com.example.domains.entities.users.AllUsersCondition
+import com.example.domains.entities.users.UserQueryService
 import com.example.domains.entities.users.Users
 import com.github.michaelbull.result.getOrElse
 import com.github.michaelbull.result.map
