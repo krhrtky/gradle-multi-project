@@ -15,9 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Run PR Agent
     if: ${{ github.event.sender.type != 'Bot' }}
+    timeout-minutes: 15
     steps:
       - id: pr-agent
-        uses: Codium-ai/pr-agent@main
+        uses: Codium-ai/pr-agent@v1.0.0
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
