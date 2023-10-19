@@ -7,3 +7,11 @@ springdoc:
     - /schema.json
   cache:
     disabled: true
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL:jdbc:mysql://localhost:3306/app}
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:password}
+  jooq:
+    sql-dialect: mysql
