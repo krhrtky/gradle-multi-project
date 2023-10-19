@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - id: pr-agent
-        uses: Codium-ai/pr-agent@v1.0.0
+        uses: Codium-ai/pr-agent@v0.8
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
