@@ -7,7 +7,7 @@ setup: setup-backend setup-frontend
 
 setup-backend: db-up db-migrate-local db-codegen
 
-setup-frontend: open-api-client-gen install-frontend
+setup-frontend: install-frontend open-api-client-gen
 
 DB_MIGRATE_COMMAND = docker compose run --rm sqldef mysqldef
 
