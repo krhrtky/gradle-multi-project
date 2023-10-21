@@ -2,8 +2,8 @@ package com.example.domains.entities.users
 
 class User private constructor(
     val id: UserID,
-    val name: String,
-    val email: String,
+    internal val name: String,
+    internal val email: String,
     private val event: List<UserDomainEvent>,
     private var eventConsumed: Boolean = false
 ) {
@@ -20,18 +20,6 @@ class User private constructor(
             )
                 .let(::listOf)
         )
-
-    internal fun <T> map(
-        mapper: (
-            id: String,
-            name: String,
-            email: String,
-        ) -> T
-    ): T = mapper(
-        id.value,
-        name,
-        email,
-    )
 
     fun getEvent() =
         if (eventConsumed) {
