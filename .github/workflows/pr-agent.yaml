@@ -1,24 +1,18 @@
-name: pr-agent
-
 on:
   pull_request:
-    types: [opened, reopened, synchronize]
   issue_comment:
-    types: [created, edited]
-
-permissions:
-  pull-requests: write
-  issues: write
-
 jobs:
-  pr_agent:
+  pr_agent_job:
     runs-on: ubuntu-latest
-    name: Run PR Agent
-    if: ${{ github.event.sender.type != 'Bot' }}
-    timeout-minutes: 15
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
+    name: Run pr agent on every pull request, respond to user comments
     steps:
-      - id: pr-agent
-        uses: Codium-ai/pr-agent@v0.8
+      - name: PR Agent action step
+        id: pragent
+        uses: Codium-ai/pr-agent@main
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
