@@ -33,13 +33,15 @@ open-api-schema-gen:
 	./gradlew backend:api:generateOpenApiDocs
 
 open-api-client-gen: open-api-schema-gen
-	cd front/app && pnpm orval --config ./orval.config.ts &&  cd ../../
+	${FRONT_APP_COMMAND} api-code:gen
+
+FRONT_APP_COMMAND = pnpm -F "app"
 
 start-backend:
 	./gradlew backend:api:bootRun
 
 start-frontend:
-	pnpm recursive run dev --filter front/app
+	${FRONT_APP_COMMAND} dev
 
 build-backend:
 	./gradlew backend:api:bootJar
@@ -48,7 +50,7 @@ install-frontend:
 	pnpm recursive install
 
 build-frontend:
-	pnpm recursive run build --filter front/app
+	${FRONT_APP_COMMAND} build
 
 test-frontend:
-	pnpm recursive test
+	${FRONT_APP_COMMAND} test
