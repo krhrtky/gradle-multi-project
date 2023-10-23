@@ -32,4 +32,4 @@ USER javauser
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-Djava/awt.headless=true", "-XX:+UseG1GC", "-Xms2g", "-Xmx2g", "-XX:-TieredCompilation", "-jar", "/app/api.jar"]
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-Djava/awt.headless=true", "-XX:+UseG1GC", "-Xms2g", "-Xmx2g", "-XX:-TieredCompilation", "-jar", "/app/jar/api.jar"]
