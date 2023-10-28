@@ -36,7 +36,7 @@ class UserController(
             .find(id)
             .map {
                 FindUserSuccessResponse(
-                    id = it.id.value,
+                    id = it.id,
                     name = it.name,
                     email = it.email,
                 )
