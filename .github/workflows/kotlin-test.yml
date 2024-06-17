@@ -48,7 +48,7 @@ jobs:
           make setup-backend
       - name: Setup and execute Gradle 'test' task
         id: lint
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: detekt
       - name: Check detekt file exists
@@ -61,7 +61,7 @@ jobs:
           fi
       - name: Unit test
         id: unitTest
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: test
       - uses: github/codeql-action/upload-sarif@v2
