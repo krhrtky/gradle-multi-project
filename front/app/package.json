@@ -33,7 +33,7 @@
     "msw": "^1.2.3",
     "typescript": "5.0.2",
     "vite": "4.4.9",
-    "vitest": "0.34.1"
+    "vitest": "0.34.6"
   },
   "packageManager": "pnpm@8.6.12",
   "engines": {
