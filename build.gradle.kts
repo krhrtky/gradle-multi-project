@@ -54,7 +54,7 @@ allprojects {
     java.sourceCompatibility = JavaVersion.VERSION_17
 
     dependencies {
-        implementation("com.michael-bull.kotlin-result:kotlin-result:1.1.18")
+        implementation("com.michael-bull.kotlin-result:kotlin-result:1.1.21")
     }
 }
 
